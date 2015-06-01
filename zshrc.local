@@ -1,10 +1,18 @@
 # add rbenv, haskell, and homebrew to PATH
-
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="./bin:$PATH"
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 
+# Add RVM and go_appengine to PATH
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH=/opt/go_appengine:$PATH
+
 eval "$(rbenv init -)"
 
 envup() { export `cat .env` }
+
+export GOPATH=~/Dropbox/Programming/golang
+
+# Use jk as another way to switch to vi mode 
+bindkey jk vi-cmd-mode

@@ -1,2 +1,15 @@
 # Bundler
 alias be="bundle exec"
+alias bu='bundle update'
+
+# Use Mac copy/paste and open utilities on Linux
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+alias open=xdg-open
+
+# Common rails commands
+alias rs='rails s'
+alias rc='rails c'
+
+# Sidekiq shortcut
+alias sk='bundle exec sidekiq'
