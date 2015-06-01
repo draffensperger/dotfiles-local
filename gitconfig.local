@@ -1,8 +1,31 @@
+[credential]
+  helper = cache --timeout=3600
+
 [alias]
   b = branch
   ch = checkout
   m = merge
   s = status
+  alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+  bd = branch -D
+  bm = branch -m
+  cb = checkout -b
+  cm = checkout master
+  d = diff
+  f = fetch origin
+  h = push --force heroku HEAD
+  l = log
+  p = push origin HEAD
+  pf = push --force origin HEAD
+  pl = pull origin HEAD
+  pm = pull origin master
+  r = revert
+  r1 = revert -m1
+  rbm = rebase master
+  rbi = rebase -i master
+  rc = rebase --continue
+  rh = reset --hard
+  u = reset --soft HEAD~1
 
 [user]
   name = draffensperger

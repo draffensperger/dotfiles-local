@@ -1,0 +1,18 @@
+# Use custom function to clean up git status a bit
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git_status_shortened
+  fi
+}
+
+# Remove the help info lines and indentation
+git_status_shortened() {
+  unbuffer git status | awk '{
+    gsub("On branch", "Branch");
+    gsub("	", "");
+    if ($0 ~ "\\(use.*") { next; }
+    print
+  }'
+}
