@@ -1,9 +1,59 @@
 " Easier escaping
 inoremap jj <Esc>
+inoremap jk <Esc>
+cnoremap jk <Esc>
+vnoremap jk <Esc>
 
 " Use tslime to run rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 let g:mustache_abbreviations = 1
 set scrolloff=5
 
-command TIL tabe~/Documents/TIL.md
+" Auto indentation
+set smartindent
+
+" Maybe I should wean myself off this one, but use system clipboard as default
+set clipboard=unnamedplus
+
+" Convenience for entering commands, just use ; for :
+map ; :
+
+" Paste text and then smart indent by default
+nmap p p=`]
+nnoremap <c-p> p
+
+" Ctrl+V pastes in insert mode
+imap <c-v> <c-r>"
+
+" Auto indent when you press i in a blank line
+function! IndentWithI()
+    if len(getline('.')) == 0
+        return "\"_cc"
+    else
+        return "i"
+    endif
+endfunction
+nnoremap <expr> i IndentWithI()
+
+" Shortcut for opening CtrlPMixed
+nnoremap <Leader>o :CtrlPMixed<CR><c-d>
+
+" Shortcut for switching between spec and source
+nmap <Leader>a :A<CR>
+
+" Shortcuts for common buffer actions
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>e :e<CR>
+
+" Shortcut for search and replace current word
+nnoremap <Leader>c :%s/\<<C-r><C-w>\>/
+
+" Expand region as you press v
+v vmap <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" Swap words left and right
+nnoremap <silent> gl "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+\_W\+<CR><c-l>
+nnoremap <silent> gh "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
