@@ -13,14 +13,15 @@ The easiest way to maintain this system is to use the
 [`rcm`](http://www.github.com/thoughtbot/rcm) command-line utility
 
 Here's what you need to do:
-- Clone both the [thoughtbot's
+
+1. Clone both the [thoughtbot's
 dotfiles](http://www.github.com/thoughtbot/dotfiles) and this repo to your home
 directory (or other directory of your choosing).
-- You edit `gitconfig` to set your own user and email.
-- Install the `rcm` dotfile management utility: https://github.com/thoughtbot/rcm
-- Run the `rcup` utility to symlink your dotfiles to your home directory:
--- If you cloned the dotfile repos to `$HOME` you can run:
+2. You edit `gitconfig` to set your own user and email.
+3. Install the `rcm` dotfile management utility: https://github.com/thoughtbot/rcm
+4. Run the `rcup` utility to symlink your dotfiles to your home directory:
+  - If you cloned the dotfile repos to `$HOME` you can run:
 `env RCRC=$HOME/dotfiles/rcrc rcup`
--- Otherwise you'll need to specify the specific folder that has your dotfiles
+  - Otherwise you'll need to specify the specific folder that has your dotfiles
 and which files to exclude:
-`EXCLUDES="README.md LICENSE" DOTFILES_DIRS="$HOME/dotfiles-local $HOME/dotfiles" rcup`
+`EXCLUDES="README.md LICENSE" DOTFILES_DIRS="/path/to/dotfiles-local /path/to/dotfiles" rcup`
