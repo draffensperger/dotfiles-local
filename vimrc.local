@@ -1,3 +1,11 @@
+" Set gruvbox color scheme with italics but no bolding
+set background=dark
+let g:gruvbox_underline=1
+let g:gruvbox_italic=1
+let g:gruvbox_undercurl=1
+let g:gruvbox_bold=0
+colorscheme gruvbox
+
 " Easier escaping
 inoremap jj <Esc>
 inoremap jk <Esc>
@@ -48,7 +56,7 @@ nnoremap <Leader>x :x<CR>
 nnoremap <Leader>e :e<CR>
 
 " Shortcut for search and replace current word
-nnoremap <Leader>c :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>rw :%s/\<<C-r><C-w>\>/
 
 " Expand region as you press v
 v vmap <Plug>(expand_region_expand)
@@ -57,3 +65,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Swap words left and right
 nnoremap <silent> gl "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+\_W\+<CR><c-l>
 nnoremap <silent> gh "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o><c-l>
+
+" NERDTree Toggle
+map <Leader>f :NERDTreeToggle<CR>

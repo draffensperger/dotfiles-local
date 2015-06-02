@@ -7,8 +7,8 @@ Plug 'vim-scripts/greplace.vim'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-expand-region'
-Plug 'vim-textobj-user'
+Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-unimpaired'
-
 Plug 'ddollar/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'morhetz/gruvbox'
