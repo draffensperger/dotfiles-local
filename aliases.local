@@ -1,18 +1,23 @@
 # Bundler
 alias be="bundle exec"
-alias bu='bundle update'
+alias bu="bundle update"
 
 # Use Mac copy/paste and open utilities on Linux
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-alias open=xdg-open
+if [ `uname` = "Linux" ]; then
+  alias pbcopy="xsel --clipboard --input"
+  alias pbpaste="xsel --clipboard --output"
+  alias open=xdg-open
+fi
 
 # Common rails commands
-alias rs='rails s'
-alias rc='rails c'
+alias rs="rails s"
+alias rc="rails c"
 
 # Sidekiq shortcut
-alias sk='bundle exec sidekiq'
+alias sk="bundle exec sidekiq"
 
 # Shortcut to reload dotfiles
-alias dotfiles='env RCRC=$HOME/dotfiles/rcrc rcup'
+alias dotfiles="env RCRC=$HOME/dotfiles/rcrc rcup"
+
+# Color ls output
+alias ls="ls --color=auto"

@@ -22,3 +22,14 @@ export TERM=xterm-256color
 
 # Remap the terminal colors for gruvbox theme
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+
+# Tweak prompt based on https://github.com/thoughtbot/dotfiles/blob/master/zshrc
+git_prompt_info() {
+  current_branch=$(git current-branch 2> /dev/null)
+  if [[ -n $current_branch ]]; then
+    echo " %{$fg[green]%}$current_branch%{$reset_color%}"
+  fi
+}
+setopt promptsubst
+export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+
