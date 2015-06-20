@@ -20,6 +20,10 @@ set scrolloff=5
 " Auto indentation
 set smartindent
 
+" Auto indent broken lines
+set breakindent
+set showbreak=\ \ " comment so that the whitespace works >.>
+
 " Maybe I should wean myself off this one, but use system clipboard as default
 set clipboard=unnamedplus
 
