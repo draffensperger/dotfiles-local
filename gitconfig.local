@@ -7,6 +7,8 @@
   m = merge
   s = status
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+  a = commit --all --amend -v
+  c = checkout
   bd = branch -D
   bm = branch -m
   cb = checkout -b
