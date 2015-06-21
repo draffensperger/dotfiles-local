@@ -8,6 +8,9 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/opt/go_appengine:$PATH
 
+# Add dotfiles-local bin directory to PATH
+export PATH=~/dotfiles-local/bin:$PATH
+
 eval "$(rbenv init -)"
 
 envup() { export `cat .env` }
@@ -33,3 +36,23 @@ git_prompt_info() {
 setopt promptsubst
 export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
 
+# Use these environment variables as path shortcuts for formatted guard output
+export WMD=$HOME/Dropbox/wmd
+export GEM=$GEM_HOME/gems
+export RUBY=$MY_RUBY_HOME
+
+# Custom command to start background devand test spring server instances
+# And then to rkun guard with customized output formatting
+rspec_pretty () {
+  format_spec_cmd_output rspec $@
+}
+gd() {
+  format_spec_cmd_output bundle exec guard -c -n f
+}
+format_spec_cmd_output() {
+  (rails runner "'start spring'" &)
+  (RAILS_ENV=test rails runner "'start spring'" &)
+  export RUBY=$MY_RUBY_HOME
+  export RSPEC=$GEM/rspec-core-`rspec -v`/lib/rspec/core;
+  unbuffer -p $@ 2>&1 <&0 | format_guard_output
+}

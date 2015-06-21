@@ -1,0 +1,100 @@
+#!/usr/bin/env ruby
+
+input = STDIN
+output = STDOUT
+
+subs = {
+  ENV['RSPEC'] => '$RSPEC',
+  ENV['RUBY'] => '$RUBY',
+  ENV['BUNDLED'] => '$BUNDLED',
+  ENV['GEM'] => '$GEM',
+  ENV['WMD'] => '$WMD',
+  ENV['HOME'] => '~',
+  '$RUBY_HOME/bin/ruby' => 'ruby',
+  /[0-9]{1,2}:[0-9][0-9]:[0-9][0-9] - INFO - / => '',
+  'rspec spec/' => '',
+  /Coverage report generated for RSpec to (.*) covered/ => 'Coverage: \1',
+  'Inspecting Ruby code style:' => 'Rubocop:',
+  '[=]{59}' => '================================',
+  'Rubocop: app/' => 'Rubocop: ',
+  'no offenses detected' => 'no offenses',
+  './' => '',
+  /include \{.*\}/ => 'DELETE_LINE',
+  # /warning: already initialized constant .*\n/m => '',
+  # /warning: previous definition of .+ was here\r?\n/m => '',
+  'exclude {:js=>true}' => 'DELETE_LINE',
+  'Bundle already up-to-date' => 'DELETE_LINE',
+  /.+ has failed, other group's plugins execution has been halted\./ => 'DELETE_LINE',
+  # 'Guard::RSpec is running' => 'DELETE_LINE',
+  'Starting Zeus' => 'DELETE_LINE',
+  /Guard is now watching at .*/ => 'DELETE_LINE',
+  %r{\$GEM/.*/lib/} => '',
+  %r{     # \$BUNDLED/.*/lib/} => '     # ',
+  %r{\$RUBY_HOME/lib/ruby/(site_ruby/)?[0-9.]*/} => '',
+  %r{(     # |\s+from )\$RSPEC/.*\.rb:[0-9].*\n}m => 'DELETE_LINE',
+  %r{\s*# \$RSPEC.*\.rb:[0-9].*\n}m => 'DELETE_LINE',
+  %r{\s*# rspec/.*\.rb:[0-9].*\n}m => 'DELETE_LINE',
+  %r{     # rspec/.*\.rb:[0-9].*\n}m => '',
+  %r{     # spork/.*\.rb:[0-9].*\n}m => '',
+  %r{     # drb/.*\.rb:[0-9].*\n}m => "\e[0m", # Reset color at the end of the stack trace which would be DRB server
+  '     # spec/' => '     # ',
+  '     # app/' => '     # ',
+  '     # ' => '',
+  /^       / => '',
+  /^     / => '',
+  /(\.rb:[0-9]*):in `(.*)'/ => '\1 \2',
+  /^  ([0-9]\)) / => '\1 ',
+  /^rspec spec\// => '',
+  /\[Zonebie\] Setting timezone:.*\n/m => '',
+  /Running tests with args.*\n/m => '',
+  /Running all specs.*\n/m => '',
+  /Run options:.*\n/m => '',
+  /\tfrom (.+)/ => ' from \1',
+  # %r{(\e\[36m).*\/(.*\.rb\e\[0m:[0-9]+:[0-9]+: )\e\[33m[A-Z]\e\[0m: } => '\1\2'
+  %r{(\e\[36m).*\/(.*\.rb\e\[0m:[0-9]+:)[0-9]+: \e\[33m[A-Z]\e\[0m: } => '\1\2 ',
+  "Do not write to stdout. Use Rails' logger if you want to log." => 'Use Rails logger not stdout',
+  /spring\/.*\.rb:[0-9]+ .*/ => 'DELETE_LINE',
+  %r{rubygems/core_ext/kernel_require.rb:[0-9]} => 'DELETE_LINE',
+  /rspec spec\// => '',
+  "-e:1:in `<main>'" => 'DELETE_LINE',
+  /for #<RSpec::Core::ExampleGroup::.+>/ => '',
+  /Running:\s+spec\// => 'Run: ',
+  'Failure/Error:' => 'Fail:',
+  'Failed examples:' => 'Failed:',
+  # / block \([0-9]+ levels?\)? in (.*)\n/ => ' block: \1',
+  # '<top (required)>' => '<top>',
+  'DELETE_LINE' => 'DELETE_LINE'
+}
+
+running_spec = false
+
+begin
+  line = ''
+  loop do
+    char = input.readchar
+
+    if running_spec
+      running_spec = false if char == "\n"
+      output.write(char)
+      next
+    else
+      line << char
+    end
+
+    next unless char == "\n"
+
+    subs.each { |from, to| line.gsub!(from, to) }
+
+    if line =~ /All examples were filtered out/
+      running_spec = true
+      line = ''
+      next
+    end
+
+    output.write(line) unless line =~ /DELETE_LINE/m
+    # puts line.inspect
+    line = ''
+  end
+rescue EOFError
+  # Do nothing on EOF, just exit
+end
