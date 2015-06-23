@@ -22,6 +22,10 @@ bind Down resize-pane -D 4
 # The 'y' (yank) keybinding handled by tmux-yank plugin below
 bind-key -t vi-copy v begin-selection
 
+# This allows me to use C-b as page up in vim (I only use C-s as my prefix key)
+set -g prefix C-s
+unbind-key C-b
+
 # Easily switch between sessions
 bind s choose-tree
 

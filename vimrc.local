@@ -13,7 +13,7 @@ cnoremap jk <Esc>
 vnoremap jk <Esc>
 
 " Use tslime to run rspec
-let g:rspec_command = 'call Send_to_Tmux("rspec_pretty {spec}\n")'
+let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
 let g:mustache_abbreviations = 1
 set scrolloff=5
 
@@ -76,9 +76,11 @@ map <Leader>f :NERDTreeToggle<CR>
 
 " Show syntastic messages with signs and use rubocop
 let g:syntastic_check_on_open=0
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+let g:syntstic_enable_signs=1
+let g:syntastic_auto_loc_list=1
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_mode_map = { "mode": "passive" }
+
 
 " Shortcut key to display errors
 nnoremap <Leader>er :Errors<CR>
@@ -86,3 +88,21 @@ nnoremap <Leader>er :Errors<CR>
 " Map key to rubocop auto-correct
 let g:vimrubocop_keymap = 0
 nmap <Leader>ru :RuboCop --auto-correct<CR>
+
+" Run Syntastic (including rubocop) after 2 seconds of inactivity
+set updatetime=2000
+let g:start_time=localtime()
+au CursorHold * call SaveAndSyntastic()
+function! SaveAndSyntastic()
+  update
+  execute "SyntasticCheck"
+endfunction
+
+let g:auto_save_events = [ "CursorMoved", "InsertLeave" ]
+let g:auto_save_no_updatetime = 1
+let g:auto_save_in_insert_mode = 0 
+let g:auto_save_silent = 1
+
+set incsearch   " incremental searching
+set ignorecase  " searches are case insensitive...
+set smartcase   " ... unless they contain at least one capital letter

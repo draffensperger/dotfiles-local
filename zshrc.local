@@ -41,6 +41,14 @@ export WMD=$HOME/Dropbox/wmd
 export GEM=$GEM_HOME/gems
 export RUBY=$MY_RUBY_HOME
 
+rspec_fn() {
+  if [ -f bin/rspec ]; then
+    bin/rspec $@
+  else
+    rspec $@
+  fi
+}
+
 # Custom command to start background devand test spring server instances
 # And then to rkun guard with customized output formatting
 rspec_pretty () {
