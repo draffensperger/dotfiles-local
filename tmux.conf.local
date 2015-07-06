@@ -22,6 +22,9 @@ bind Down resize-pane -D 4
 # The 'y' (yank) keybinding handled by tmux-yank plugin below
 bind-key -t vi-copy v begin-selection
 
+# disable the tmux status bar
+set -g status off
+
 # This allows me to use C-b as page up in vim (I only use C-s as my prefix key)
 set -g prefix C-s
 unbind-key C-b
@@ -69,7 +72,7 @@ set -g @tpm_plugins '              \
       tmux-plugins/tmux-yank       \
       tmux-plugins/tmux-copycat       \
       tmux-plugins/tmux-logging      \
-'
+      '
 # Initializes TMUX plugin manager.
 # Keep this line at the very bottom of tmux.conf.
 run-shell '$HOME/.tmux/plugins/tpm/tpm'

@@ -12,7 +12,6 @@
   bd = branch -D
   bm = branch -m
   cb = checkout -b
-  cm = checkout master
   d = diff
   f = fetch origin
   h = push --force heroku HEAD

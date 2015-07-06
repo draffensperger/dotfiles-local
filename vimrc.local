@@ -89,15 +89,15 @@ nnoremap <Leader>er :Errors<CR>
 let g:vimrubocop_keymap = 0
 nmap <Leader>ru :RuboCop --auto-correct<CR>
 
-" Run Syntastic (including rubocop) after 2 seconds of inactivity
-set updatetime=2000
-let g:start_time=localtime()
-au CursorHold * call SaveAndSyntastic()
-function! SaveAndSyntastic()
-  update
+" Run Syntastic (including rubocop) after a few seconds of inactivity
+set updatetime=6000
+au CursorHold * call RunSyntastic()
+function! RunSyntastic()
   execute "SyntasticCheck"
 endfunction
 
+" Autosave immediately when not in insert mode
+let g:auto_save = 1
 let g:auto_save_events = [ "CursorMoved", "InsertLeave" ]
 let g:auto_save_no_updatetime = 1
 let g:auto_save_in_insert_mode = 0 
