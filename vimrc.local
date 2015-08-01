@@ -30,10 +30,6 @@ set clipboard=unnamedplus
 " Convenience for entering commands, just use ; for :
 map ; :
 
-" Paste text and then smart indent by default
-nmap p p=`]
-nnoremap <c-p> p
-
 " Ctrl+V pastes in insert mode
 imap <c-v> <c-r>"
 
