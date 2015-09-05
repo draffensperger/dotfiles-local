@@ -18,6 +18,3 @@ alias sk="bundle exec sidekiq"
 
 # Shortcut to reload dotfiles
 alias dotfiles="env RCRC=$HOME/dotfiles/rcrc rcup"
-
-# Color ls output
-alias ls="ls --color=auto"

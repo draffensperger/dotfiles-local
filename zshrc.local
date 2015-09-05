@@ -20,8 +20,9 @@ export GOPATH=~/Dropbox/Programming/golang
 # Use jk as another way to switch to vi mode 
 bindkey jk vi-cmd-mode
 
-# Use 256 colors in gnome-terminal by default
-export TERM=xterm-256color
+# Use 256 colors with italics for use in iTerm2
+tic "$HOME/dotfiles-local/xterm-256color-italic.terminfo"
+export TERM=xterm-256color-italic
 
 # Remap the terminal colors for gruvbox theme
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
