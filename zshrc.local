@@ -65,3 +65,8 @@ format_spec_cmd_output() {
   export RSPEC=$GEM/rspec-core-`rspec -v`/lib/rspec/core;
   unbuffer -p $@ 2>&1 <&0 | format_guard_output
 }
+
+# Start tmux session if not already in one
+if [ -z "$TMUX" ]; then
+  tmux new-session -A -s wmd
+fi
