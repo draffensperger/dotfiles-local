@@ -47,7 +47,7 @@ nnoremap <expr> i IndentWithI()
 nnoremap <Leader>o :CtrlPMixed<CR><c-d>
 
 " Shortcut for switching between spec and source
-nmap <Leader>a :A<CR>
+" nmap <Leader>a :A<CR>
 
 " Shortcuts for common buffer actions
 nnoremap <Leader>w :w<CR>
@@ -71,11 +71,11 @@ nnoremap <silent> gh "_yiw?\w\+\_W\+\%#<CR>:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\
 map <Leader>f :NERDTreeToggle<CR>
 
 " Show syntastic messages with signs and use rubocop
-let g:syntastic_check_on_open=0
-let g:syntstic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_mode_map = { "mode": "passive" }
+" let g:syntastic_check_on_open=0
+" let g:syntstic_enable_signs=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+" let g:syntastic_mode_map = { "mode": "passive" }
 
 
 " Shortcut key to display errors
@@ -86,19 +86,22 @@ let g:vimrubocop_keymap = 0
 nmap <Leader>ru :RuboCop --auto-correct<CR>
 
 " Run Syntastic (including rubocop) after a few seconds of inactivity
-set updatetime=6000
-au CursorHold * call RunSyntastic()
-function! RunSyntastic()
-  execute "SyntasticCheck"
-endfunction
+" set updatetime=6000
+" au CursorHold * call RunSyntastic()
+" function! RunSyntastic()
+"   execute "SyntasticCheck"
+" endfunction
 
 " Autosave immediately when not in insert mode
-let g:auto_save = 1
-let g:auto_save_events = [ "CursorMoved", "InsertLeave" ]
-let g:auto_save_no_updatetime = 1
-let g:auto_save_in_insert_mode = 0 
-let g:auto_save_silent = 1
+" let g:auto_save = 1
+" let g:auto_save_events = [ "CursorMoved", "InsertLeave" ]
+" let g:auto_save_no_updatetime = 1
+" let g:auto_save_in_insert_mode = 0 
+" let g:auto_save_silent = 1
 
 set incsearch   " incremental searching
 set ignorecase  " searches are case insensitive...
 set smartcase   " ... unless they contain at least one capital letter
+
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"

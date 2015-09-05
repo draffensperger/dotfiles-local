@@ -9,6 +9,8 @@
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
   a = commit --all --amend -v
   c = checkout
+  cm = checkout master
+  pm = pull origin master
   bd = branch -D
   bm = branch -m
   cb = checkout -b
