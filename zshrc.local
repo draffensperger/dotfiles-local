@@ -3,6 +3,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="./bin:$PATH"
 export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH="/opt/local/bin:$PATH"
 
 # Add RVM and go_appengine to PATH
 export PATH="$PATH:$HOME/.rvm/bin"

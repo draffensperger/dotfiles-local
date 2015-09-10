@@ -17,6 +17,10 @@ let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
 let g:mustache_abbreviations = 1
 set scrolloff=5
 
+" always use current session and window in tslime
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
+
 " Auto indentation
 set smartindent
 
@@ -76,7 +80,6 @@ map <Leader>f :NERDTreeToggle<CR>
 " let g:syntastic_auto_loc_list=1
 " let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 " let g:syntastic_mode_map = { "mode": "passive" }
-
 
 " Shortcut key to display errors
 nnoremap <Leader>er :Errors<CR>
