@@ -66,3 +66,12 @@ format_spec_cmd_output() {
   export RSPEC=$GEM/rspec-core-`rspec -v`/lib/rspec/core;
   unbuffer -p $@ 2>&1 <&0 | format_guard_output
 }
+
+
+# Set git credential cache by operating system
+if [[ `uname` == 'Linux' ]]; then
+  git config --global credential.helper cache
+  git config --global credential.helper 'cache --timeout=1209600'
+else
+  git config --global credential.helper osxkeychain
+fi

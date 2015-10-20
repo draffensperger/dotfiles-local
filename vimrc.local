@@ -29,7 +29,12 @@ set breakindent
 set showbreak=\ \ " comment so that the whitespace works >.>
 
 " Maybe I should wean myself off this one, but use system clipboard as default
-set clipboard=unnamed
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Linux"
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+endif
 
 " Convenience for entering commands, just use ; for :
 map ; :
