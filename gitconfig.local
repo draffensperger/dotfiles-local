@@ -16,7 +16,6 @@
   h = push --force heroku HEAD
   l = log
   p = push origin HEAD
-  pf = push --force origin HEAD
   pl = pull origin HEAD
   pm = pull origin master
   r = revert
