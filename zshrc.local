@@ -46,9 +46,9 @@ export RUBY=$MY_RUBY_HOME
 
 rspec_fn() {
   if [ -f bin/rspec ]; then
-    bin/rspec $@
+    RAILS_ENV=test NO_COVERAGE=1 bin/rspec $@
   else
-    rspec $@
+    RAILS_ENV=test bundle exec rspec $@
   fi
 }
 

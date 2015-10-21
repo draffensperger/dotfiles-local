@@ -10,8 +10,10 @@ if [ `uname` = "Linux" ]; then
 fi
 
 # Common rails commands
-alias rs="rails s"
-alias rc="rails c"
+alias rc="bundle exec rails c"
+alias rs="bundle exec rails s"
+alias rs1="bundle exec rails s -p 3001"
+alias rs2="bundle exec rails s -p 3002"
 
 # Sidekiq shortcut
 alias sk="bundle exec sidekiq"
