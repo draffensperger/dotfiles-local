@@ -5,6 +5,7 @@ export PATH="./bin:$PATH"
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH="/opt/local/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
+export PATH="$HOME/wmd/ecs_config/bin:$PATH"
 
 # Add RVM and go_appengine to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
