@@ -71,12 +71,18 @@ set -g default-terminal "screen-256color"
 # Requires installation of tmux plugin manager via:
 # git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 # Supports `github_username/repo` or full git repo URLs
+# Run prefix + I to re-install tmux plugins
 set -g @tpm_plugins '              \
       tmux-plugins/tpm                 \
       tmux-plugins/tmux-yank       \
       tmux-plugins/tmux-copycat       \
       tmux-plugins/tmux-logging      \
+      tmux-plugins/tmux-resurrect \
       '
+
+# Use tmux-resurect to restore vim sessions
+set -g @resurrect-strategy-vim 'session'
+
 # Initializes TMUX plugin manager.
 # Keep this line at the very bottom of tmux.conf.
 run-shell '$HOME/.tmux/plugins/tpm/tpm'

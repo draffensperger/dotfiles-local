@@ -113,3 +113,14 @@ set smartcase   " ... unless they contain at least one capital letter
 
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
+
+" save undo history per file
+set undofile
+" set a directory to store the undo history
+set undodir=$HOME/.vimundo/
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" enables % to jump between opening and closing tags
+runtime macros/matchit.vim
