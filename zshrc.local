@@ -69,7 +69,6 @@ format_spec_cmd_output() {
   unbuffer -p $@ 2>&1 <&0 | format_guard_output
 }
 
-
 # Set git credential cache by operating system
 if [[ `uname` == 'Linux' ]]; then
   git config --global credential.helper cache
@@ -77,3 +76,6 @@ if [[ `uname` == 'Linux' ]]; then
 else
   git config --global credential.helper osxkeychain
 fi
+
+# Configure the prompt for running docker on default vm
+eval "$(docker-machine env default)"
