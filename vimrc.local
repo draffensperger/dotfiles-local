@@ -11,6 +11,13 @@ inoremap jj <Esc>
 inoremap jk <Esc>
 cnoremap jk <Esc>
 vnoremap jk <Esc>
+" inoremap kj <Esc>
+" cnoremap kj <Esc>
+" vnoremap kj <Esc>
+
+" Allow scrolling through wrapped lines
+nmap k gk
+nmap j gj
 
 " Use tslime to run rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'

@@ -76,6 +76,3 @@ if [[ `uname` == 'Linux' ]]; then
 else
   git config --global credential.helper osxkeychain
 fi
-
-# Configure the prompt for running docker on default vm
-eval "$(docker-machine env default)"
