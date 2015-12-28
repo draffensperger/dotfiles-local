@@ -1,0 +1,19 @@
+" These are settings that are shared between Vim and IdeaVim plugin
+
+" Easier escaping
+inoremap jj <Esc>
+inoremap jk <Esc>
+cnoremap jk <Esc>
+vnoremap jk <Esc>
+
+" Allow scrolling through wrapped lines
+nmap k gk
+nmap j gj
+
+" Shortcuts for common buffer actions
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>e :e<CR>
+

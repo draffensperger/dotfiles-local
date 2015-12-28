@@ -1,0 +1,5 @@
+source ~/.vimrc.shared
+
+" This mimics the functionality of adding blank lines from unimpaired
+nnoremap ]<Space> o<Esc>k
+nnoremap [<Space> O<Esc>j

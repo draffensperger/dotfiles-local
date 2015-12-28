@@ -1,3 +1,5 @@
+source ~/.vimrc.shared
+
 " Set gruvbox color scheme with italics but no bolding
 set background=dark
 let g:gruvbox_underline=1
@@ -5,19 +7,6 @@ let g:gruvbox_italic=1
 let g:gruvbox_undercurl=1
 let g:gruvbox_bold=0
 colorscheme gruvbox
-
-" Easier escaping
-inoremap jj <Esc>
-inoremap jk <Esc>
-cnoremap jk <Esc>
-vnoremap jk <Esc>
-" inoremap kj <Esc>
-" cnoremap kj <Esc>
-" vnoremap kj <Esc>
-
-" Allow scrolling through wrapped lines
-nmap k gk
-nmap j gj
 
 " Use tslime to run rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
@@ -71,6 +60,10 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>e :e<CR>
+
+" Move items in lists
+nnoremap <Leader><c-h> :SidewaysLeft<cr>
+nnoremap <Leader><c-l> :SidewaysRight<cr>
 
 " Shortcut for search and replace current word
 nnoremap <Leader>rw :%s/\<<C-r><C-w>\>/

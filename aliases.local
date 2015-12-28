@@ -18,5 +18,9 @@ alias rs2="bundle exec rails s -p 3002"
 # Sidekiq shortcut
 alias sk="bundle exec sidekiq"
 
+# Docker commands
+alias sd=start_docker
+alias d=docker
+
 # Shortcut to reload dotfiles
 alias dotfiles="env RCRC=$HOME/dotfiles/rcrc rcup"

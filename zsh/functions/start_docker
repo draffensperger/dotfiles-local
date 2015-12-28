@@ -1,1 +1,3 @@
-eval "$(docker-machine env default)"
+function start_docker() {
+  eval "$(docker-machine env default)"
+}
