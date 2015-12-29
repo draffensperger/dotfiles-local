@@ -1,5 +1,8 @@
 " These are settings that are shared between Vim and IdeaVim plugin
 
+" Auto indentation
+set smartindent
+
 " Easier escaping
 inoremap jj <Esc>
 inoremap jk <Esc>
@@ -17,3 +20,12 @@ nnoremap <Leader>Q :q!<CR>
 nnoremap <Leader>x :x<CR>
 nnoremap <Leader>e :e<CR>
 
+" Convenience for entering commands, just use ; for :
+nnoremap ; :
+
+" Shortcuts for common buffer actions
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>e :e<CR>

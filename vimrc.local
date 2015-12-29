@@ -17,9 +17,6 @@ set scrolloff=5
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
-" Auto indentation
-set smartindent
-
 " Auto indent broken lines
 set breakindent
 set showbreak=\ \ " comment so that the whitespace works >.>
@@ -32,34 +29,27 @@ else
   set clipboard=unnamed
 endif
 
-" Convenience for entering commands, just use ; for :
-map ; :
-
 " Ctrl+V pastes in insert mode
 imap <c-v> <c-r>"
 
 " Auto indent when you press i in a blank line
 function! IndentWithI()
-    if len(getline('.')) == 0
-        return "\"_cc"
-    else
-        return "i"
-    endif
+  if len(getline('.')) == 0
+    return "\"_cc"
+  else
+    return "i"
+  endif
 endfunction
 nnoremap <expr> i IndentWithI()
 
 " Shortcut for opening CtrlPMixed
 nnoremap <Leader>o :CtrlPMixed<CR><c-d>
 
+" Have CtrlP search the current working directory not open file's directory
+let g:ctrlp_working_path_mode = 'wra'
+
 " Shortcut for switching between spec and source
 " nmap <Leader>a :A<CR>
-
-" Shortcuts for common buffer actions
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :q!<CR>
-nnoremap <Leader>x :x<CR>
-nnoremap <Leader>e :e<CR>
 
 " Move items in lists
 nnoremap <Leader><c-h> :SidewaysLeft<cr>
@@ -124,3 +114,9 @@ autocmd VimResized * :wincmd =
 
 " enables % to jump between opening and closing tags
 runtime macros/matchit.vim
+
+" Go to last file if invoked without arguments.
+autocmd VimEnter * nested if
+  \ argc() == 0 |
+  \   exe "normal! `0" |
+  \ endif

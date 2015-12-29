@@ -1,5 +1,24 @@
+" My leader was set in the thoughtbot dotfiles which I'm not including for
+" simplicity in the ideavim config.
+let mapleader = " "
+
 source ~/.vimrc.shared
 
 " This mimics the functionality of adding blank lines from unimpaired
 nnoremap ]<Space> o<Esc>k
 nnoremap [<Space> O<Esc>j
+
+" This mimics the <Leader><Leader> effect of going back to the previous window
+nnoremap <Leader><Leader> :action PreviousTab<cr>
+
+" Sadly this doesn't work. Would be nice if it did - it almost does, it will
+" bring up the open file dialog, but won't focus it.
+" nnoremap <Leader>o :action GotoFile<cr>
+
+" Things I want from vim:
+" <Leader>rw to replace word
+" <Leader>f to toggle the project files on the left
+" want the system clipboard to integrate with ideavim
+
+" Show line number
+set number

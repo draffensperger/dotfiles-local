@@ -7,9 +7,6 @@ g() {
   fi
 }
 
-# Complete g like git
-compdef g=git
-
 # Remove the help info lines and indentation
 git_status_shortened() {
   unbuffer git status | awk '{
