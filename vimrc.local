@@ -97,10 +97,6 @@ nmap <Leader>ru :RuboCop --auto-correct<CR>
 " let g:auto_save_in_insert_mode = 0 
 " let g:auto_save_silent = 1
 
-set incsearch   " incremental searching
-set ignorecase  " searches are case insensitive...
-set smartcase   " ... unless they contain at least one capital letter
-
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
 

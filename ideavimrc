@@ -22,3 +22,5 @@ nnoremap <Leader><Leader> :action PreviousTab<cr>
 
 " Show line number
 set number
+
+set clipboard=unnamed
