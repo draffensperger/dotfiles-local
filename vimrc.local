@@ -8,6 +8,15 @@ let g:gruvbox_undercurl=1
 let g:gruvbox_bold=0
 colorscheme gruvbox
 
+" Wrap lines, but don't do auto-linebreaking
+" From: http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
+set wrap
+set linebreak
+set nolist  " list disables linebreak
+set textwidth=80
+set wrapmargin=0
+set formatoptions-=t
+
 " Use tslime to run rspec
 let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
 let g:mustache_abbreviations = 1
