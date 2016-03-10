@@ -3,5 +3,4 @@ function start_docker() {
   export DOCKER_HOST=tcp://localhost:2376
   export DOCKER_CERT_PATH=/Users/dave/.docker/machine/machines/default
   export DOCKER_MACHINE_NAME=default
-  #eval "$(docker-machine env default)"
 }

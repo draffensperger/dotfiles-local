@@ -20,7 +20,8 @@ set wrapmargin=0
 set formatoptions-=t
 
 " Use tslime to run rspec
-let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
+"let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
+let g:rspec_command = 'Dispatch bin/rspec {spec}'
 let g:mustache_abbreviations = 1
 set scrolloff=5
 
@@ -128,3 +129,10 @@ autocmd VimEnter * nested if
   \   exe "normal! `0" |
   \ endif
 
+" Useful for editing and auto-sourcing/auto-installing vim config
+nmap <Leader>vl :e ~/dotfiles-local/vimrc.local<CR>
+nmap <Leader>vb :e ~/dotfiles-local/vimrc.bundles.local<CR>
+nmap <Leader>vs :e ~/dotfiles-local/vimrc.shared<CR>
+autocmd! bufwritepost vimrc.local silent source %
+autocmd! bufwritepost vimrc.shared silent source % 
+autocmd! bufwritepost vimrc.bundles.local silent execute '!env RCRC=$HOME/dotfiles/rcrc rcup' | silent source $MYVIMRC | redraw!
