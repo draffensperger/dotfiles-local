@@ -9,3 +9,7 @@ end
 Pry::Commands.command /^$/, "repeat last command" do
   _pry_.run_command Pry.history.to_a.last
 end
+
+def cp(str)
+  IO.popen("pbcopy", "w") { |pipe| pipe.puts str }
+end

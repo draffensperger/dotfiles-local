@@ -8,6 +8,8 @@ let g:gruvbox_undercurl=1
 let g:gruvbox_bold=0
 colorscheme gruvbox
 
+set relativenumber
+
 " Wrap lines, but don't do auto-linebreaking
 " From: http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 set wrap
@@ -125,3 +127,4 @@ autocmd VimEnter * nested if
   \ argc() == 0 |
   \   exe "normal! `0" |
   \ endif
+
