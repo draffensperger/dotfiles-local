@@ -4,7 +4,8 @@ source ~/.vimrc.shared
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Parameters for vim and plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set relativenumber
+"set relativenumber
+set nonumber
 
 " Wrap lines, but don't do auto-linebreaking
 " From: http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
@@ -35,7 +36,9 @@ let g:gruvbox_underline=1
 let g:gruvbox_italic=1
 let g:gruvbox_undercurl=1
 let g:gruvbox_bold=0
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme nofrils-dark
+let g:nofrils_strbackgrounds=1
 
 " save undo history per file
 set undofile
@@ -54,11 +57,65 @@ let g:mustache_abbreviations = 1
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
+let g:tmux_navigator_save_on_switch = 1
+
 " Map key to rubocop auto-correct
 let g:vimrubocop_keymap = 0
 
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
+
+let g:airline_powerline_fonts = 1
+
+let g:EasyMotion_do_mapping = 0
+
+let g:semanticTermColors = [88, 100, 136, 24, 96, 66]
+
+let g:semanticBlacklistOverride = {
+	\ 'ruby': [
+	\	'BEGIN',
+	\	'do',
+	\	'?',
+	\	'END',
+	\	'__FILE__',
+	\	'__LINE__',
+	\	'alias',
+	\	'and',
+	\	'begin',
+	\	'break',
+	\	'case',
+	\	'class',
+	\	'def',
+	\	'defined',
+	\	'else',
+	\	'elsif',
+	\	'end',
+	\	'ensure',
+	\	'false',
+	\	'for',
+	\	'if',
+	\	'in',
+	\	'module',
+	\	'next',
+	\	'nil',
+	\	'not',
+	\	'or',
+	\	'redo',
+	\	'rescue',
+	\	'retry',
+	\	'return',
+	\	'self',
+	\	'super',
+	\	'then',
+	\	'true',
+	\	'undef',
+	\	'unless',
+	\	'until',
+	\	'when',
+	\	'while',
+	\	'each',
+	\ ],
+\ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions and executable commands
@@ -76,8 +133,31 @@ endfunction
 " enables % to jump between opening and closing tags
 runtime macros/matchit.vim
 
+set laststatus=0
+"let s:hidden_all = 0
+"function! ToggleHiddenAll()
+    "if s:hidden_all  == 0
+        "let s:hidden_all = 1
+        "set noshowmode
+        "set noruler
+        "set laststatus=0
+        "set noshowcmd
+    "else
+        "let s:hidden_all = 0
+        "set showmode
+        "set ruler
+        "set laststatus=2
+        "set showcmd
+    "endif
+"endfunction
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
 augroup VimrcLocalAugroup
   autocmd!
+
+  " automatically save buffers when you switch between them
+  autocmd BufLeave,FocusLost * wall
 
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
@@ -90,6 +170,9 @@ augroup VimrcLocalAugroup
         \ argc() == 0 |
         \   exe "normal! `0" |
         \ endif
+
+  " close vim if only nerdtree left
+   " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
   " Reload vimrc when it's saved
   autocmd bufwritepost vimrc.local execute 'normal! mm' | silent so $MYVIMRC | execute 'normal! `m'
@@ -106,21 +189,50 @@ endif
 " General keyboard shortcut mappings (that are not shared with IdeaVim)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" I include these because vim-tmux-navigator doesn't seem to reload when I
+" source my vimrc again.
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+
 nmap <expr> i IndentWithI()
+
+nmap s <Plug>(easymotion-overwin-f)
+
+nmap <Leader><c-L> :SidewaysRight<cr>
+nmap <Leader><c-H> :SidewaysLeft<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader key mappings (that are not shared with IdeaVim or from thoughtbot)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "nnoremap <leader><leader> <c-^>| "thoughtbot
+nmap <Leader>.f :silent cd ~/dotfiles-local<CR>
+nmap <Leader>.nt :silent cd ~/dotfiles-local<CR> :NERDTreeToggle<CR> <C-j> CD :NERDTreeToggle<CR>
 nmap <Leader>a :A<CR>| " Shortcut for switching between spec and source
+nmap <leader>bp orequire 'pry'; binding.pry<esc>^
+nmap <leader>bn :g/binding\.pry/d<cr>:w<cr>
 "nmap <Leader>ct :call ReindexCtags()<CR>| "thoughtbot
 "nmap <Leader>e :e| "ideavim shared:
+vmap <Leader>d <Plug>SendSelectionToTmux<cr>
+nmap <Leader>d mmV<Plug>SendSelectionToTmux<cr>`m
 nmap <Leader>er :Errors<CR>
+nmap <Leader>ec :e %:p:h<cr>| " Open folder of current buffer
 nmap <Leader>f :NERDTreeToggle<CR>
-nmap <Leader>h :SidewaysLeft<cr>
-nmap <Leader>l :SidewaysRight<cr>
-nmap <Leader>o :CtrlPMixed<CR><c-d>
+nmap <Leader>gc :Gcommit -v<CR>
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gac :Git aa<CR><Space>:Gcommit -v<CR>
+nmap <Leader>gp :Git p<cr><space>
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+"nmap<Leader>l :call :call RunLastSpec()<CR>| "thoughtbot
+nmap <Leader>nr :e ~/wmd/scratch/scratch.rb<CR>
+nmap <Leader>nc :e ~/wmd/scratch/cmds.txt<CR>
+nmap <Leader>nt :e ~/wmd/scratch/todo.txt<CR>
+nmap <Leader>o :CtrlP<CR><c-d>
+nmap <Leader>p :CtrlPMRU<CR><c-d>
 nmap <Leader>ru :RuboCop --auto-correct<CR>
 nmap <Leader>rw :%s/\<<C-r><C-w>\>/| " Search and replace current word
 "nmap<Leader>s :call RunNearestSpec()<CR>| "thoughtbot
