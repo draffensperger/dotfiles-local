@@ -11,6 +11,8 @@ export PATH="$HOME/wmd/ecs_config/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/opt/go_appengine:$PATH
 
+export CDPATH=$HOME/wmd:$HOME
+
 # Add dotfiles-local bin directory to PATH
 export PATH=~/dotfiles-local/bin:$PATH
 
@@ -20,7 +22,7 @@ envup() { export `cat .env` }
 
 export GOPATH=~/Dropbox/Programming/golang
 
-# Use jk as another way to switch to vi mode 
+# Use jk as another way to switch to vi mode
 bindkey jk vi-cmd-mode
 
 # Use 256 colors with italics for use in iTerm2
