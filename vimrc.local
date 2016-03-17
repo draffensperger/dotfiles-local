@@ -182,3 +182,4 @@ nmap <Leader>vp :e ~/dotfiles-local/vimrc.bundles.local<CR>
 nmap <Leader>vs :e ~/dotfiles-local/vimrc.shared<CR>
 "nmap <Leader>w :w| "ideavim shared
 "nmap <Leader>x :x| "ideavim shared
+

@@ -39,3 +39,6 @@
 
 [credential]
   helper = osxkeychain
+
+[color "diff-highlight"]
+   oldNormal = red bold
