@@ -7,6 +7,12 @@ export PATH="/opt/local/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/wmd/ecs_config/bin:$PATH"
 
+# this helps with docker and vpn
+export DOCKER_TLS_VERIFY=1
+export DOCKER_HOST=tcp://localhost:2376
+export DOCKER_CERT_PATH=/Users/dave/.docker/machine/machines/default
+export DOCKER_MACHINE_NAME=default
+
 # Add RVM and go_appengine to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/opt/go_appengine:$PATH

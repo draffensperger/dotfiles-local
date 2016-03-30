@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+SPEC_PATTERNS = {
+  %r{(^spec/.+_spec\.rb$)} => '\1',
+  %r{^app/(.+)\.rb$} => 'spec/\1_spec.rb'
+}
+
+def spec_for_file(file)
+  SPEC_PATTERNS.each do |pattern, substitute|
+    return file.sub(pattern, substitute) if file =~ pattern
+  end
+  nil
+end
+
+specs = ARGF.map(&method(:spec_for_file)).compact.uniq
+specs.each(&method(:puts))

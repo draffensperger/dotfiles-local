@@ -15,11 +15,15 @@ alias rs="bundle exec rails s"
 alias rs1="bundle exec rails s -p 3001"
 alias rs2="bundle exec rails s -p 3002"
 
+# Rake and rubocop
+alias rk="bundle exec rake"
+alias rp="bundle exec rubocop -a"
+alias ck="bundle exec rubocop -a && bundle exec rspec"
+
 # Sidekiq shortcut
 alias sk="bundle exec sidekiq"
 
 # Docker commands
-alias sd=start_docker
 alias d=docker
 
 # Shortcut to reload dotfiles

@@ -16,6 +16,10 @@ set textwidth=80
 set wrapmargin=0
 set formatoptions-=t
 
+" Makes rails.vim :A create alterate file
+" didn't quite get that working!
+" set confirm
+
 set scrolloff=5
 
 " Auto indent broken lines
@@ -70,6 +74,8 @@ let g:airline_powerline_fonts = 1
 let g:EasyMotion_do_mapping = 0
 
 let g:golden_ratio_wrap_ignored = 1
+
+let test#strategy = "tslime"
 
 " Use a nicer split character
 set fillchars+=vert:│
@@ -170,10 +176,14 @@ map <Leader>k <Plug>(easymotion-k)
 nmap <Leader>nr :e ~/wmd/scratch/scratch.rb<CR>
 nmap <Leader>nc :e ~/wmd/scratch/cmds.txt<CR>
 nmap <Leader>nt :e ~/wmd/scratch/todo.txt<CR>
+nmap <Leader>nw :e ~/wmd/scratch/workflow.txt<CR>
 nmap <Leader>o :CtrlP<CR><c-d>
 nmap <Leader>p :CtrlPMRU<CR><c-d>
 nmap <Leader>ru :RuboCop --auto-correct<CR>
+nmap <Leader>rg "ayiw:Gsearch <C-r>a<CR><CR><CR>:%s/\<<C-r>a\>/
 nmap <Leader>rw :%s/\<<C-r><C-w>\>/| " Search and replace current word
+nmap <Leader>rn :let @z = expand("%:t")<cr>:Rename <c-r>z
+nmap <Leader>rm :Remove
 "nmap<Leader>s :call RunNearestSpec()<CR>| "thoughtbot
 "nmap<Leader>t :call RunNearestSpecFile()<CR>| "thoughtbot
 "nmap <Leader>q :q| "ideavim shared
