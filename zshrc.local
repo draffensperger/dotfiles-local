@@ -49,7 +49,14 @@ git_prompt_info() {
   fi
 }
 setopt promptsubst
-export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+
+exit_code_based_prompt() {
+  echo "%(?.%%.%{$fg[red]%}%%%{$reset_color%})"
+}
+
+export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_color%}$(git_prompt_info) $(exit_code_based_prompt) '
+
+#export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
 
 # Use these environment variables as path shortcuts for formatted guard output
 export WMD=$HOME/Dropbox/wmd
