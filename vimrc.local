@@ -52,9 +52,6 @@ set undodir=$HOME/.vimundo/
 " Have CtrlP search the current working directory not open file's directory
 let g:ctrlp_working_path_mode = 'wra'
 
-" Use tslime to run rspec
-let g:rspec_command = 'call Send_to_Tmux("rspec_fn {spec}\n")'
-"let g:rspec_command = 'Dispatch bundle exec spring rspec {spec}'
 let g:mustache_abbreviations = 1
 
 " always use current session and window in tslime
@@ -154,6 +151,8 @@ nmap <Leader><c-H> :SidewaysLeft<cr>
 " Leader key mappings (that are not shared with IdeaVim or from thoughtbot)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+nmap <Leader>/ :Gsearch
+"vmap <Leader>/ "zy:Gsearch <C-r>z<CR><CR><CR>:%s/\<<C-r>a\>/
 "nnoremap <leader><leader> <c-^>| "thoughtbot
 nmap <Leader>.f :silent cd ~/dotfiles-local<CR>
 nmap <Leader>.nt :silent cd ~/dotfiles-local<CR> :NERDTreeToggle<CR> <C-j> CD :NERDTreeToggle<CR>
@@ -192,4 +191,3 @@ nmap <Leader>vp :e ~/dotfiles-local/vimrc.bundles.local<CR>
 nmap <Leader>vs :e ~/dotfiles-local/vimrc.shared<CR>
 "nmap <Leader>w :w| "ideavim shared
 "nmap <Leader>x :x| "ideavim shared
-

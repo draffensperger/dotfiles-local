@@ -17,6 +17,9 @@ export DOCKER_MACHINE_NAME=default
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=/opt/go_appengine:$PATH
 
+# By default don't run coverage
+export NO_COVERAGE=1
+
 export CDPATH=$HOME/wmd:$HOME
 
 # Add dotfiles-local bin directory to PATH
@@ -52,14 +55,6 @@ export PS1='${SSH_CONNECTION+"%{$fg[green]%}%n@%m:"}%{$fg[blue]%}%c%{$reset_colo
 export WMD=$HOME/Dropbox/wmd
 export GEM=$GEM_HOME/gems
 export RUBY=$MY_RUBY_HOME
-
-rspec_fn() {
-  if [ -f bin/rspec ]; then
-    RAILS_ENV=test NO_COVERAGE=1 bin/rspec $@
-  else
-    RAILS_ENV=test bundle exec rspec $@
-  fi
-}
 
 # Custom command to start background devand test spring server instances
 # And then to rkun guard with customized output formatting

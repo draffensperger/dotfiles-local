@@ -19,6 +19,8 @@ alias rs2="bundle exec rails s -p 3002"
 alias rk="bundle exec rake"
 alias rp="bundle exec rubocop -a"
 alias ck="bundle exec rubocop -a && bundle exec rspec"
+alias s="NO_COVERAGE= rspec_fn"
+alias ss="spring stop"
 
 # Sidekiq shortcut
 alias sk="bundle exec sidekiq"

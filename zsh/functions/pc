@@ -1,5 +1,4 @@
 # Cru-specific rails console for prod
 pc() {
-  start_docker
   prod_console
 }
