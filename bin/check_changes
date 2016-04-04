@@ -1,3 +1,19 @@
-git diff --name-only origin/master | grep \\.rb | xargs ls 2>/dev/null | xargs bundle exec rubocop -a && \
-git diff --name-only origin/master | specs_for_files | xargs bin/rspec
+#!/usr/bin/env ruby
 
+def rubocop
+  return true if changed_rb_files.size == 0
+  system("unbuffer bundle exec rubocop -a #{changed_rb_files} | "\
+         "tee /dev/tty | grep -q 'no offenses'")
+end
+
+def changed_rb_files
+  $changed_rb_files ||=
+    `git diff --name-only origin/master | grep \\\\.rb | xargs ls 2>/dev/null`
+    .split("\n").join(" ")
+end
+
+def specs
+  system('git diff --name-only origin/master | specs_for_files | xargs rspec_fn')
+end
+
+exit rubocop && specs ? 0 : 1

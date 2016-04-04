@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -f bin/rspec ]
+then
+  if [ "$#" -ne 0 ]; then
+    NO_COVERAGE=
+  fi
+  RAILS_ENV=test bin/rspec $@
+else
+  RAILS_ENV=test bundle exec rspec $@
+fi

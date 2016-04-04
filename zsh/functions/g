@@ -3,7 +3,7 @@ g() {
   if [[ $# > 0 ]]; then
     git $@
   else
-    git_status_shortened
+    git status --short
   fi
 }
 
