@@ -27,6 +27,7 @@ alias sk="bundle exec sidekiq"
 
 # Docker commands
 alias d=docker
+alias dm=docker-machine
 
 # Shortcut to reload dotfiles
 alias dotfiles="env RCRC=$HOME/dotfiles/rcrc rcup"
