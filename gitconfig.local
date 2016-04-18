@@ -5,6 +5,7 @@
   s = status
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
   c = checkout
+  cp = cherry-pick
   cm = checkout master
   pm = pull origin master
   bd = branch -D
@@ -19,8 +20,8 @@
   pm = pull origin master
   r = revert
   r1 = revert -m1
-  rbm = rebase master
-  rbi = rebase -i master
+  rbm = rebase origin/master
+  rbi = rebase -i origin/master
   rc = rebase --continue
   rh = reset --hard
   u = reset --soft HEAD~1
