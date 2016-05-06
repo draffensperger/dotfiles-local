@@ -12,6 +12,11 @@ bind ^T split-window -hp 30 -c "#{pane_current_path}"
 unbind c
 bind c new-window -c "#{pane_current_path}"
 
+
+set-window-option -g xterm-keys on
+bind m resize-pane -R 1
+bind l resize-pane -L 1
+
 # resize splits using arrow keys
 unbind Right
 bind Right resize-pane -R 8

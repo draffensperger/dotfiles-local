@@ -7,11 +7,17 @@ export PATH="/opt/local/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/wmd/ecs_config/bin:$PATH"
 
-# this helps with docker and vpn
+# this helps with docker and vpn when using docker-machine + virtualbox
 export DOCKER_TLS_VERIFY=1
 export DOCKER_HOST=tcp://localhost:2376
 export DOCKER_CERT_PATH=/Users/dave/.docker/machine/machines/default
 export DOCKER_MACHINE_NAME=default
+
+# now that i'm trying the native docker on mac, these shouldn't be set
+#unset DOCKER_TLS_VERIFY
+#unset DOCKER_HOST
+#unset DOCKER_CERT_PATH
+#unset DOCKER_MACHINE_NAME
 
 # Add RVM and go_appengine to PATH
 export PATH="$PATH:$HOME/.rvm/bin"

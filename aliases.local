@@ -25,6 +25,9 @@ alias ss="spring stop"
 # Sidekiq shortcut
 alias sk="bundle exec sidekiq"
 
+# Heroku toolbelt alias
+alias h="heroku"
+
 # Docker commands
 alias d=docker
 alias dm=docker-machine
