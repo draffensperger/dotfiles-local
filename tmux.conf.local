@@ -17,6 +17,9 @@ set-window-option -g xterm-keys on
 bind m resize-pane -R 1
 bind l resize-pane -L 1
 
+bind-key S-Left swap-window -t -1
+bind-key S-Right swap-window -t +1
+
 # resize splits using arrow keys
 unbind Right
 bind Right resize-pane -R 8
