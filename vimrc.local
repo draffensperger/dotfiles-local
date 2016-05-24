@@ -118,6 +118,16 @@ runtime macros/matchit.vim
 
 set laststatus=0
 
+" http://stackoverflow.com/questions/6496778/vim-run-autocmd-on-all-filetypes-except
+fun! StripTrailingWhitespace()
+    " Only strip trailing text on these filetypes
+    if &ft =~ 'ruby\|javascript\|perl'
+      %s/\s\+$//e
+    endif
+endfun
+
+autocmd BufWritePre * call StripTrailingWhitespace()
+
 augroup VimrcLocalAugroup
   autocmd!
 
@@ -128,7 +138,7 @@ augroup VimrcLocalAugroup
   autocmd VimResized * :wincmd =
 
   " Remove whitespace before writing a buffer
-  autocmd bufwritepre * :%s/\s\+$//e
+  autocmd bufwritepre * call StripTrailingWhitespace()
 
   " Go to last file if invoked without arguments.
   autocmd VimEnter * nested if

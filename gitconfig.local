@@ -7,6 +7,7 @@
   c = checkout
   cp = cherry-pick
   cm = checkout master
+  cnv = commit --no-verify -v
   pm = pull origin master
   bd = branch -D
   bm = branch -m
