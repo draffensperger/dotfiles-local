@@ -1,2 +1,10 @@
 #!/bin/bash
-check_changes
+# taken from gmurphey.com/2013/02/02/ignoring-git-hooks-when-rebasing.html
+# skips pre commit hook when rebasing
+BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
+
+if [ $BRANCH_NAME != '(no branch)' ]
+then
+  check_changes
+fi
+

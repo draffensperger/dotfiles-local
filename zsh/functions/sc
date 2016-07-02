@@ -1,5 +1,4 @@
 # Cru-specific rails console for prod
 sc() {
-  start_docker
   stage_console
 }
