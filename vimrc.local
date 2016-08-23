@@ -93,7 +93,8 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackprg = 'ag --vimgrep'
 
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+"4 space indent for js: autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 nnoremap <M-Left> :tabprevious<CR>
 nnoremap <M-Right> :tabnext<CR>
@@ -104,6 +105,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" python config
+set cindent
+autocmd FileType python setlocal smartindent shiftwidth=4 ts=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions and executable commands
@@ -121,7 +126,7 @@ endfunction
 " enables % to jump between opening and closing tags
 runtime macros/matchit.vim
 
-set laststatus=0
+set laststatus=2
 
 " http://stackoverflow.com/questions/6496778/vim-run-autocmd-on-all-filetypes-except
 fun! StripTrailingWhitespace()
