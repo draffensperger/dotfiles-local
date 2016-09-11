@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "angular": "./",
+    "es_modules": {}
+  },
+  "libs": [
+    "browser",
+    "jquery",
+    "ecma5",
+    "ecma6"
+  ],
+  "ecmaVersion": 5
+}
