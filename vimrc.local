@@ -22,6 +22,7 @@ set linebreak
 set nolist  " list disables linebreak
 set textwidth=80
 set wrapmargin=0
+set cino=N-s
 set formatoptions-=t
 
 " Makes rails.vim :A create alterate file
@@ -33,7 +34,7 @@ set scrolloff=5
 " Auto indent broken lines
 set breakindent
 set showbreak=\ \ " comment so that the whitespace works >.>
-
+   
 " Maybe I should wean myself off this one, but use system clipboard as default
 let os = substitute(system('uname'), "\n", "", "")
 if os == "Linux"
@@ -139,6 +140,12 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:syntastic_html_tidy_ignore_errors = [
       \ 'proprietary attribute',  'discarding unexpected', '> is not recognized'
       \]
+let g:syntastic_c_include_dirs = ['../src']
+let g:syntastic_c_compiler_options = '-I src'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+let g:syntastic_cpp_include_dirs = ['src', '/Users/dave/.conan/data/gtest/1.7.0/lasote/stable/package/6930affda001dc28b1deb6ad58e56385dec517ad/include']
+
+"let g:syntastic_c_check_header = 0
 
 "autocmd FileType javascript setlocal iskeyword-=.
 setlocal iskeyword-=.
@@ -171,10 +178,10 @@ fun! StripTrailingWhitespace()
     endif
 endfun
 
-autocmd BufWritePre * call StripTrailingWhitespace()
-
 augroup VimrcLocalAugroup
   autocmd!
+
+  autocmd BufWritePre * call StripTrailingWhitespace()
 
   " automatically save buffers when you switch between them
   autocmd BufLeave,FocusLost * wall
@@ -251,13 +258,14 @@ nmap <Leader>gp :Git p<cr><space>
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 "nmap<Leader>l :call :call RunLastSpec()<CR>| "thoughtbot
-nmap <Leader>nr :e ~/wmd/scratch/scratch.rb<CR>
-nmap <Leader>ne :e ~/wmd/scratch/boston_rb_meetup.rb<CR>
-nmap <Leader>nc :e ~/wmd/scratch/cmds.txt<CR>
-nmap <Leader>nt :e ~/wmd/scratch/todo.txt<CR>
-nmap <Leader>nw :e ~/wmd/scratch/workflow.txt<CR>
+nmap<Leader>l :silent exec "Tmux ./run.sh"<CR>
+nmap <Leader>nr :e ~/Dropbox/Programming/scratch/scratch.rb<CR>
+nmap <Leader>nc :e ~/Dropbox/Programming/scratch/cmds.txt<CR>
+nmap <Leader>nt :e ~/Dropbox/Programming/scratch/todo.txt<CR>
+nmap <Leader>nw :e ~/Dropbox/Programming/scratch/workflow.txt<CR>
 nmap <Leader>o :CtrlP<CR><c-d>
 nmap <Leader>p :CtrlPMRU<CR><c-d>
+nmap <Leader>rd :Tmux !!<cr>
 nmap <Leader>ru :RuboCop --auto-correct<CR>
 nmap <Leader>rg "ayiw:Gsearch <C-r>a<CR><CR><CR>:%s/\<<C-r>a\>/
 nmap <Leader>rw :%s/\<<C-r><C-w>\>/| " Search and replace current word

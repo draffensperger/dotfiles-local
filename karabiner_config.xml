@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<root>
+  <!-- This fille will be symlinked to ~/Library/ 
+    /Users/dave/Library/Application Support/Karabiner/private.xml
+  -->
+  
+ <appdef>
+    <appname>ITERM2</appname>
+    <equal>com.googlecode.iterm2</equal>
+  </appdef>
+    <item>
+        <name>Google Sheets Insert / Delete Hack</name>
+        <appendix>Change Control+D to Control+Option+E,D and Control+I to Control+Option+I,R</appendix>
+        <identifier>private.app_chrome_row_insert_delete</identifier>
+        <only>GOOGLE_CHROME</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::D, VK_CONTROL,
+            KeyCode::E, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L, KeyCode::D
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::I, VK_CONTROL,
+            KeyCode::I, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L, KeyCode::R
+        </autogen>
+    </item>
+    
+    <item>
+        <name>Make Mac OS general Control keys work more like Win/ChromeOS/Linux</name>
+        <appendix>Adds handling for common operations to work with Ctrl</appendix>
+        <identifier>private.mac_control_key_shortcuts</identifier>
+        <not>ITERM2</not>
+        <autogen>
+            __KeyToKey__
+            KeyCode::C, VK_CONTROL,
+            KeyCode::C, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::V, VK_CONTROL,
+            KeyCode::V, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::Z, VK_CONTROL,
+            KeyCode::Z, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::A, VK_CONTROL,
+            KeyCode::A, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::S, VK_CONTROL,
+            KeyCode::S, ModifierFlag::COMMAND_L
+        </autogen>
+    </item>
+    
+    <item>
+        <name>Make Mac OS Chrome work like Chromebook/Linux more</name>
+        <appendix>Adds handling for common operations to work with Ctrl</appendix>
+        <identifier>private.app_chrome_control_key_shortcuts</identifier>
+        <only>GOOGLE_CHROME</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::T, VK_CONTROL,
+            KeyCode::T, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::W, VK_CONTROL,
+            KeyCode::W, ModifierFlag::COMMAND_L
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::R, VK_CONTROL,
+            KeyCode::R, ModifierFlag::COMMAND_L
+        </autogen>
+    </item>
+    
+    <item>
+        <name>Gmail Shortcuts for Dictation</name>
+        <appendix>Gmail shortcuts with command control option modifiers</appendix>
+        <identifier>private.app_chrome_gmail_dictation</identifier>
+        <!--<only>GOOGLE_CHROME</only>-->
+        <autogen>
+            __KeyToKey__
+            KeyCode::Y, VK_CONTROL, VK_COMMAND,
+            KeyCode::Y
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::R, VK_CONTROL, VK_OPTION, VK_COMMAND,
+            KeyCode::R
+        </autogen>
+    </item>
+</root>

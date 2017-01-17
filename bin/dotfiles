@@ -1,0 +1,5 @@
+# Run the thoughtbot dotfiles symlinker
+env RCRC=$HOME/dotfiles/rcrc rcup
+
+# Symlink the config file for Karabiner
+ln -f -s "$HOME/dotfiles-local/karabiner_config.xml" "$HOME/Library/Application Support/Karabiner/private.xml"

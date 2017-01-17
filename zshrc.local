@@ -1,7 +1,6 @@
 export ANDROID_HOME=$HOME/Library/Android/sdk
 
 # add rbenv, haskell, and homebrew to PATH
-export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="./bin:$PATH"
 export PATH="$HOME/Library/Haskell/bin:$PATH"
@@ -10,6 +9,7 @@ export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/wmd/ecs_config/bin:$PATH"
 export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH="/usr/local/bin:$PATH"
 
 # this helps with docker and vpn when using docker-machine + virtualbox
 export DOCKER_TLS_VERIFY=1
@@ -111,6 +111,6 @@ source '/Users/dave/google-cloud-sdk/completion.zsh.inc'
 
 # Necessary for pyenv-virtualenv, see
 # https://github.com/yyuu/pyenv-virtualenv#installing-with-homebrew-for-os-x-users
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 

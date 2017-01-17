@@ -54,3 +54,11 @@ Blue 3465a4 729fcf
 Magenta 75507b ad7fa8
 Cyan 07989a 32e2e2
 White d3d7cf eeeeec
+
+## Other config
+
+To make my Mac keyboard shortcuts be more consistent with a Chromebook
+/ Linux keyboard shortcuts (also customized), I used Seil to map my caps
+lock key to keycode 110 and then mapped that to control / command
+(depending on key and application). I use Karabiner is manage the mac shortcut
+keys.

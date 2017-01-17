@@ -1,6 +1,7 @@
 # Bundler
 alias be="bundle exec"
 alias bu="bundle update"
+alias cl="~/utilities/styleguide/cpplint/cpplint.py"
 
 # Use Mac copy/paste and open utilities on Linux
 if [ `uname` = "Linux" ]; then
@@ -32,6 +33,3 @@ alias h="heroku"
 alias d=docker
 alias dm=docker-machine
 alias m="bundle exec rake db:migrate"
-
-# Shortcut to reload dotfiles
-alias dotfiles="env RCRC=$HOME/dotfiles/rcrc rcup"
