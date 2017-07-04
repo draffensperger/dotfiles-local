@@ -22,7 +22,7 @@ set linebreak
 set nolist  " list disables linebreak
 set textwidth=80
 set wrapmargin=0
-set cino=N-s
+set cindent
 set formatoptions-=t
 
 " Makes rails.vim :A create alterate file
@@ -43,8 +43,11 @@ else
   set clipboard=unnamed
 endif
 
+let g:clang_format#auto_format = 1
+
 " Set gruvbox color scheme with italics but no bolding
 set background=dark
+"set background=light
 let g:gruvbox_underline=1
 let g:gruvbox_italic=1
 let g:gruvbox_undercurl=1
@@ -72,6 +75,8 @@ let g:tmux_navigator_save_on_switch = 1
 " Map key to rubocop auto-correct
 let g:vimrubocop_keymap = 0
 
+let g:NERDTreeQuitOnOpen = 1
+
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
 
@@ -97,15 +102,11 @@ let g:ackprg = 'ag --vimgrep'
 "4 space indent for js: autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
-nnoremap <M-Left> :tabprevious<CR>
-nnoremap <M-Right> :tabnext<CR>
-
 autocmd FileType js UltiSnipsAddFiletypes javascript-jasmine
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="/Users/dave/dotfiles-local/vim/UltiSnips/"
-
 
 " Courtesy of https://github.com/christoomey/dotfiles/blob/master/vim/rcplugins/youcompleteme-ultisnips-supertab
 " and http://stackoverflow.com/a/22253548/1626737
@@ -128,14 +129,15 @@ let g:UltiSnipsJumpForwardTrigger      = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger     = '<c-k>'
 
 " python config
-set cindent
+autocmd Filetype cpp setlocal shiftwidth=2 cinoptions=h1,l1,g1,t0,i4,+4,(0,w1,W4),N-s
 autocmd FileType python setlocal smartindent shiftwidth=4 ts=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving
 " insert mode
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" this does not work in q: mode
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 let g:syntastic_html_tidy_ignore_errors = [
       \ 'proprietary attribute',  'discarding unexpected', '> is not recognized'
@@ -148,7 +150,6 @@ let g:syntastic_cpp_include_dirs = ['src', '/Users/dave/.conan/data/gtest/1.7.0/
 "let g:syntastic_c_check_header = 0
 
 "autocmd FileType javascript setlocal iskeyword-=.
-setlocal iskeyword-=.
 
 let g:ycm_filetype_whitelist = { 'javascript': 1 }
 
@@ -170,7 +171,7 @@ runtime macros/matchit.vim
 
 set laststatus=2
 
-" http://stackoverflow.com/questions/6496778/vim-run-autocmd-on-all-filetypes-except
+" http://stackoverflow.com/questions/6496775/vim-run-autocmd-on-all-filetypes-except
 fun! StripTrailingWhitespace()
     " Only strip trailing text on these filetypes
     if &ft =~ 'ruby\|javascript\|perl'
@@ -182,6 +183,8 @@ augroup VimrcLocalAugroup
   autocmd!
 
   autocmd BufWritePre * call StripTrailingWhitespace()
+  autocmd BufWritePre *.cc :ClangFormat
+  autocmd BufWritePre *.h :ClangFormat
 
   " automatically save buffers when you switch between them
   autocmd BufLeave,FocusLost * wall
@@ -218,6 +221,10 @@ endif
 
 " I include these because vim-tmux-navigator doesn't seem to reload when I
 " source my vimrc again.
+nnoremap <silent> <c-q> <c-v>
+nnoremap <silent> <c-n> <c-w>
+nnoremap <silent> <c-w> <nop>
+
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
@@ -225,7 +232,6 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 nmap <expr> i IndentWithI()
-
 nmap s <Plug>(easymotion-overwin-f)
 
 nmap <Leader><c-L> :SidewaysRight<cr>
@@ -242,8 +248,10 @@ nmap <Leader>/ :Gsearch
 "nnoremap <leader><leader> <c-^>| "thoughtbot
 nmap <Leader>.f :silent cd ~/dotfiles-local<CR>
 nmap <Leader>.nt :silent cd ~/dotfiles-local<CR> :NERDTreeToggle<CR> <C-j> CD :NERDTreeToggle<CR>
-nmap <leader>bp orequire 'pry'; binding.pry<esc>
-nmap <leader>bn :g/binding\.pry/d<cr>:w<cr>
+"nmap <leader>bp orequire 'pry'; binding.pry<esc>
+nmap <leader>bp odebugger;<esc>
+"nmap <leader>bn :g/binding\.pry/d<cr>:w<cr>
+nmap <leader>bn :g/debugger;/d<cr>:w<cr>
 "nmap <Leader>ct :call ReindexCtags()<CR>| "thoughtbot
 "nmap <Leader>e :e| "ideavim shared:
 vmap <Leader>d <Plug>SendSelectionToTmux<cr>
@@ -260,7 +268,7 @@ map <Leader>k <Plug>(easymotion-k)
 "nmap<Leader>l :call :call RunLastSpec()<CR>| "thoughtbot
 nmap<Leader>l :silent exec "Tmux ./run.sh"<CR>
 nmap <Leader>nr :e ~/Dropbox/Programming/scratch/scratch.rb<CR>
-nmap <Leader>nc :e ~/Dropbox/Programming/scratch/cmds.txt<CR>
+nmap <Leader>nc :e ~/Dropbox/Programming/scratch/cmds.sh<CR>
 nmap <Leader>nt :e ~/Dropbox/Programming/scratch/todo.txt<CR>
 nmap <Leader>nw :e ~/Dropbox/Programming/scratch/workflow.txt<CR>
 nmap <Leader>o :CtrlP<CR><c-d>
@@ -283,4 +291,8 @@ nmap <Leader>ue :UltiSnipsEdit<CR>
 nmap <Leader>vs :Obsess<CR>
 "nmap <Leader>w :w| "ideavim shared
 "nmap <Leader>x :x| "ideavim shared
-nmap <Leader>; <Plug>(easymotion-bd-w)
+map <Leader>; <Plug>(easymotion-bd-w)
+
+let g:textobj_ast_debug=1
+set runtimepath+=~/wmd/vim-textobj-ast/
+setlocal iskeyword-=.

@@ -109,6 +109,17 @@ source '/Users/dave/google-cloud-sdk/path.zsh.inc'
 # The next line enables shell command completion for gcloud.
 source '/Users/dave/google-cloud-sdk/completion.zsh.inc'
 
+# Fix for italics in tmux:
+# https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/#tmux-21-and-above
+cat <<EOF|tic -x -
+tmux|tmux terminal multiplexer,
+  ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m, Ms@,
+  use=xterm+tmux, use=screen,
+
+tmux-256color|tmux with 256 colors,
+  use=xterm+256setaf, use=tmux,
+EOF
+
 # Necessary for pyenv-virtualenv, see
 # https://github.com/yyuu/pyenv-virtualenv#installing-with-homebrew-for-os-x-users
 #eval "$(pyenv init -)"

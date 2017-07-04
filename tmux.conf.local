@@ -33,7 +33,7 @@ bind Down resize-pane -D 4
 
 # Setup 'v' to begin selection as in Vim
 # The 'y' (yank) keybinding handled by tmux-yank plugin below
-bind-key -t vi-copy v begin-selection
+#bind-key -t vi-copy v begin-selection
 
 # disable the tmux status bar
 set -g status off
@@ -57,10 +57,6 @@ bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq v
 # increase scrollback buffer size
 set -g history-limit 50000
 
-# utf8 is on
-set -g utf8 on
-set -g status-utf8 on
-
 # address vim mode switching delay (http://superuser.com/a/252717/65504)
 set -s escape-time 0
 
@@ -74,7 +70,10 @@ set -g display-time 4000
 set -g status-interval 5
 
 # upgrade $TERM
-set -g default-terminal "screen-256color"
+set -g default-terminal "tmux"
+
+set -g default-shell $SHELL
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
 # List of plugins
 # Requires installation of tmux plugin manager via:
