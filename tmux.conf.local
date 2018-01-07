@@ -33,7 +33,11 @@ bind Down resize-pane -D 4
 
 # Setup 'v' to begin selection as in Vim
 # The 'y' (yank) keybinding handled by tmux-yank plugin below
-#bind-key -t vi-copy v begin-selection
+
+bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind-key -Tcopy-mode-vi Escape send -X cancel
+bind-key -Tcopy-mode-vi V send -X rectangle-toggle
 
 # disable the tmux status bar
 set -g status off

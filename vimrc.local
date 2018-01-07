@@ -45,6 +45,18 @@ endif
 
 let g:clang_format#auto_format = 1
 
+let g:neomake_typescript_enabled_makers = ['tslint']
+"let g:neomake_typescript_tslint_errorformat = '%EERROR: %f[%l\, %c]: %m'
+
+function! neomake#makers#ft#typescript#tslint() abort
+  return {
+        \ 'args': [
+        \ '%:p', 
+        \ ],
+        \ 'errorformat': '%EERROR: %f[%l\, %c]: %m'
+        \ }
+endfunction 
+
 " Set gruvbox color scheme with italics but no bolding
 set background=dark
 "set background=light
@@ -146,6 +158,7 @@ let g:syntastic_c_include_dirs = ['../src']
 let g:syntastic_c_compiler_options = '-I src'
 let g:syntastic_cpp_compiler_options = '-std=c++11'
 let g:syntastic_cpp_include_dirs = ['src', '/Users/dave/.conan/data/gtest/1.7.0/lasote/stable/package/6930affda001dc28b1deb6ad58e56385dec517ad/include']
+let NERDTreeIgnore = ['\.pyc$']
 
 "let g:syntastic_c_check_header = 0
 
@@ -181,6 +194,8 @@ endfun
 
 augroup VimrcLocalAugroup
   autocmd!
+
+  autocmd! BufWritePost * Neomake
 
   autocmd BufWritePre * call StripTrailingWhitespace()
   autocmd BufWritePre *.cc :ClangFormat
@@ -250,6 +265,7 @@ nmap <Leader>.f :silent cd ~/dotfiles-local<CR>
 nmap <Leader>.nt :silent cd ~/dotfiles-local<CR> :NERDTreeToggle<CR> <C-j> CD :NERDTreeToggle<CR>
 "nmap <leader>bp orequire 'pry'; binding.pry<esc>
 nmap <leader>bp odebugger;<esc>
+nnoremap <leader>ba :e ~/dotfiles-local/zshrc.local<cr>
 "nmap <leader>bn :g/binding\.pry/d<cr>:w<cr>
 nmap <leader>bn :g/debugger;/d<cr>:w<cr>
 "nmap <Leader>ct :call ReindexCtags()<CR>| "thoughtbot
@@ -279,6 +295,7 @@ nmap <Leader>rg "ayiw:Gsearch <C-r>a<CR><CR><CR>:%s/\<<C-r>a\>/
 nmap <Leader>rw :%s/\<<C-r><C-w>\>/| " Search and replace current word
 nmap <Leader>rn :let @z = expand("%:t")<cr>:Rename <c-r>z
 nmap <Leader>rm :Remove
+nmap <Leader>rl :source ~/wmd/vim-textobj-ast/autoload/textobj/ast.vim<cr>
 "nmap<Leader>s :call RunNearestSpec()<CR>| "thoughtbot
 nmap<Leader>s :AngularRunSpec<CR>
 "nmap<Leader>t :call RunNearestSpecFile()<CR>| "thoughtbot
@@ -295,4 +312,19 @@ map <Leader>; <Plug>(easymotion-bd-w)
 
 let g:textobj_ast_debug=1
 set runtimepath+=~/wmd/vim-textobj-ast/
+autocmd Filetype python setlocal ts=2 sts=2 sw=2
 setlocal iskeyword-=.
+
+source ~/wmd/vim-textobj-ast/autoload/textobj/ast.vim
+let g:expand_region_text_objects_typescript = {
+      \ 'ax' :1
+      \ }
+let g:expand_region_text_objects_javacript = {
+      \ 'ax' :1
+      \ }
+
+function! ShowSynstack()
+  for id in synstack(line("."), col("."))
+    echom synIDattr(id, "name")
+  endfor
+endfunction

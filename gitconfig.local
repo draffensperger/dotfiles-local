@@ -4,6 +4,7 @@
   m = merge
   nf = merge --no-ff
   s = status
+  status = status -v -v
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
   c = checkout
   cp = cherry-pick

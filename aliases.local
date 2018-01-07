@@ -33,3 +33,9 @@ alias h="heroku"
 alias d=docker
 alias dm=docker-machine
 alias m="bundle exec rake db:migrate"
+
+# Git
+alias ga="git add --all"
+alias gc="git commit -v"
+
+alias antlr4="java -jar /Users/dave/.m2/repository/org/antlr/antlr4/4.7.1-SNAPSHOT/antlr4-4.7.1-SNAPSHOT-complete.jar"
